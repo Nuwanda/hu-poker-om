@@ -45,12 +45,18 @@
                                          :status true
                                          :xfbml true
                                          :version "v2.0"})
-                               (put! c :loaded)))))
+                               (put! c [:loaded {}])))))
   (did-mount [_]
              (let [c (om/get-state owner :fb-events)]
                (go (loop []
-                     (<! c)
-                     (fb/get-login-status #(om/transact! data :logged (fn [] true)))))))
+                     (let [[event value] (<! c)]
+                       (cond
+                             (= event :loaded) (fb/Event:subscribe "auth.statusChange" #(put! c [:change (js->clj % :keywordize-keys true)]))
+                             (= event :change) (if (= (:status value) "connected")
+                                                 (om/transact! data :logged (fn [_] true))
+                                                 (om/transact! data :logged (fn [_] false)))
+                             :else (print event))
+                     (recur))))))
   (render [_]
           (dom/div #js {:id "fb-root"} nil)))
 
