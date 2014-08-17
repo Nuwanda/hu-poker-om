@@ -1,4 +1,9 @@
-(ns poker-site.facebook)
+(ns poker-site.facebook
+  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require [cljs.core.async :refer [put! chan <!]]
+            [om.core :as om :include-macros true]
+            [om-tools.dom :as dom :include-macros true]
+            [om-tools.core :refer-macros [defcomponent]]))
 
 
 ;; ref: https://developers.facebook.com/docs/javascript/
@@ -106,3 +111,45 @@
   ([]       (. js/FB.XFBML (parse)))
   ([dom]    (. js/FB.XFBML (parse dom)))
   ([dom cb] (. js/FB.XFBML (parse dom cb))))
+
+
+;; Om components
+(defcomponent login-button
+  "Om component for the facebook login button, takes a map of options
+  as specificied by https://developers.facebook.com/docs/plugins/login-button (not scope)"
+  [data owner {:keys [appId max-rows size show-faces? auto-login? on-login]
+               :or {max-rows 1
+                    size "large"
+                    show-faces? false
+                    auto-login? true
+                    on-login nil}}]
+  (display-name [_]
+                "fb-login")
+  (init-state [_]
+              {:fb-events (chan)})
+  (will-mount [_]
+              (let [c (om/get-state owner :fb-events)]
+                (load-sdk (fn []
+                            (init {:appId appId
+                                   :status true
+                                   :xfbml true
+                                   :version "v2.0"})
+                            (put! c [:loaded {}])))))
+  (did-mount [_]
+             (let [c (om/get-state owner :fb-events)]
+               (go (loop []
+                     (let [[event value] (<! c)]
+                       (cond
+                        (= event :loaded) (Event:subscribe "auth.statusChange" #(put! c [:change (js->clj % :keywordize-keys true)]))
+                        (= event :change) (if (= (:status value) "connected")
+                                            (om/transact! data :logged (fn [_] true))
+                                            (om/transact! data :logged (fn [_] false)))
+                        :else (print event))
+                       (recur))))))
+  om/IRender
+  (render [_]
+          (dom/div
+                   (dom/div {:id "fb-root"} nil)
+                   (dom/div {:class "fb-login-button" :data-max-rows max-rows
+                             :data-size size :data-show-faces show-faces?
+                             :data-auto-logout-link auto-login? :onLogin on-login} nil))))
