@@ -12,9 +12,10 @@ goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.
 goog.addDependency("../om/dom.js", ['om.dom'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers']);
 goog.addDependency("../cljs/core/async/impl/channels.js", ['cljs.core.async.impl.channels'], ['cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols']);
+goog.addDependency("../om_tools/dom.js", ['om_tools.dom'], ['cljs.core', 'om.dom', 'clojure.string']);
 goog.addDependency("../om/core.js", ['om.core'], ['cljs.core', 'om.dom', 'goog.ui.IdGenerator']);
 goog.addDependency("../om_tools/core.js", ['om_tools.core'], ['plumbing.core', 'cljs.core', 'om.core', 'plumbing.fnk.schema']);
-goog.addDependency("../poker_site/facebook.js", ['poker_site.facebook'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.timers'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'cljs.core.async.impl.timers']);
-goog.addDependency("../poker_site/core.js", ['poker_site.core'], ['poker_site.facebook', 'om_tools.core', 'cljs.core', 'om.dom', 'cljs.core.async', 'poker_site.util', 'om.core']);
+goog.addDependency("../poker_site/facebook.js", ['poker_site.facebook'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'cljs.core.async', 'om.core']);
+goog.addDependency("../poker_site/core.js", ['poker_site.core'], ['poker_site.facebook', 'om_tools.dom', 'om_tools.core', 'cljs.core', 'poker_site.util', 'om.core']);
