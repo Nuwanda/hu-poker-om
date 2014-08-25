@@ -26,7 +26,7 @@ om_tools.dom.opt_key_case = (function opt_key_case(attr){if(cljs.core.truth_((fu
 /**
 * Converts aliased attributes
 */
-om_tools.dom.opt_key_alias = (function opt_key_alias(opt){var G__17213 = (((opt instanceof cljs.core.Keyword))?opt.fqn:null);switch (G__17213) {
+om_tools.dom.opt_key_alias = (function opt_key_alias(opt){var G__14505 = (((opt instanceof cljs.core.Keyword))?opt.fqn:null);switch (G__14505) {
 case "for":
 return new cljs.core.Keyword(null,"htmlFor","htmlFor",-1050291720);
 
@@ -51,7 +51,7 @@ om_tools.dom.format_opt_val = (function format_opt_val(opt_val){if(cljs.core.map
 /**
 * Returns JavaScript object for React DOM attributes from opts map
 */
-om_tools.dom.format_opts = (function format_opts(opts){return cljs.core.clj__GT_js.call(null,cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p__17217){var vec__17218 = p__17217;var k = cljs.core.nth.call(null,vec__17218,(0),null);var v = cljs.core.nth.call(null,vec__17218,(1),null);return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [om_tools.dom.format_opt_key.call(null,k),om_tools.dom.format_opt_val.call(null,v)], null);
+om_tools.dom.format_opts = (function format_opts(opts){return cljs.core.clj__GT_js.call(null,cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p__14509){var vec__14510 = p__14509;var k = cljs.core.nth.call(null,vec__14510,(0),null);var v = cljs.core.nth.call(null,vec__14510,(1),null);return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [om_tools.dom.format_opt_key.call(null,k),om_tools.dom.format_opt_val.call(null,v)], null);
 }),opts)));
 });
 om_tools.dom.literal_QMARK_ = (function literal_QMARK_(form){return !(((form instanceof cljs.core.Symbol)) || (cljs.core.list_QMARK_.call(null,form)));
@@ -83,7 +83,7 @@ om_tools.dom.element_args = (function element_args(opts,children){if((opts == nu
 }
 }
 });
-om_tools.dom.element = (function element(ctor,opts,children){var vec__17220 = om_tools.dom.element_args.call(null,opts,children);var opts__$1 = cljs.core.nth.call(null,vec__17220,(0),null);var children__$1 = cljs.core.nth.call(null,vec__17220,(1),null);return cljs.core.apply.call(null,ctor,cljs.core.flatten.call(null,cljs.core.cons.call(null,opts__$1,children__$1)));
+om_tools.dom.element = (function element(ctor,opts,children){var vec__14512 = om_tools.dom.element_args.call(null,opts,children);var opts__$1 = cljs.core.nth.call(null,vec__14512,(0),null);var children__$1 = cljs.core.nth.call(null,vec__14512,(1),null);return cljs.core.apply.call(null,ctor,cljs.core.flatten.call(null,cljs.core.cons.call(null,opts__$1,children__$1)));
 });
 om_tools.dom.class_set = (function class_set(m){var temp__4126__auto__ = cljs.core.seq.call(null,cljs.core.distinct.call(null,cljs.core.map.call(null,cljs.core.name,cljs.core.keys.call(null,cljs.core.filter.call(null,cljs.core.val,m)))));if(temp__4126__auto__)
 {var ks = temp__4126__auto__;return clojure.string.join.call(null," ",ks);

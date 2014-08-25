@@ -12,6 +12,8 @@
 
   :source-paths ["src"]
 
+  :min-lein-version "2.0.0"
+
   :cljsbuild {
     :builds [{:id "poker-site"
               :source-paths ["src"]
