@@ -8,9 +8,14 @@
              [cljs.core.async :refer [put! <! chan]]
              [cljs.reader :refer [read-string]]))
 
+(defn- validate-bet [number stack]
+  (if (> number 0)
+    (min number stack)
+    (max number (- 0 stack))))
+
 (defn- handle-result
   "Handles text change, in case it's a number sends it to the parent, doesn't allow non-numbers"
-  [e id owner {:keys [text out]}]
+  [e id owner {:keys [text out]} stack]
   (let [value (.. e -target -value)]
     (if (re-find #"^[+-]?\d*$" value)
       (do
@@ -18,7 +23,9 @@
         (when (not= value "")
           (let [number (read-string value)]
             (when (number? number)
-              (put! out [id number])))))
+              (let [final (validate-bet number stack)]
+                (om/set-state! owner :text final)
+                (put! out [id final]))))))
       (om/set-state! owner :text text))
     (when (= value "")
       (put! out [id 0]))))
@@ -42,7 +49,7 @@
                                  (dom/input {:class "form-control"
                                              :type "text"
                                              :style {:text-align "right"}
-                                             :on-change #(handle-result % (:id @data) owner state)
+                                             :on-change #(handle-result % (:id @data) owner state (:stack @data))
                                              :value (:text state)}
                                             nil)
                                  (dom/span {:class "input-group-addon"} "bb")))))
