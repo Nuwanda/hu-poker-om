@@ -17,6 +17,8 @@
                         :player2 {:id 2 :stack 200 :bis 2 :name "Pedro Lopes"}}}))
 
 (defcomponent teste [data owner]
+  (display-name [_]
+                "root")
   (render [_]
           (dom/div
            (om/build stats data)
