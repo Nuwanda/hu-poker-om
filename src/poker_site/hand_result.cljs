@@ -9,6 +9,7 @@
              [cljs.reader :refer [read-string]]))
 
 
+;;only sends back to parent proper values
 (defn- handle-input [event out id owner text]
   (let [value (.. event -target -value)]
     (if (re-find #"^[+-]?\d*\.?5?$" value)
@@ -84,15 +85,22 @@
    (or (= number "+") (= number "-"))                    0
    :else                                                 (read-string number)))
 
+(defn- send-to-self? [number]
+  (if (re-find #"\.$" number)
+    false
+    (if (= (parse-number number) 0)
+      false
+      true)))
+
 ;;Manda mensagem de novo valor para os dois clientes
-(defn- send-message [out src msg]
+(defn- send-message [out src msg to-self?]
   (if (= src 1)
     (do
-      (when (not= msg 0)
+      (when to-self?
         (put! out {:category :id1 :value msg}))
       (put! out {:category :id2 :value (- 0 msg)}))
     (do
-      (when (not= msg 0)
+      (when to-self?
         (put! out {:category :id2 :value msg}))
       (put! out {:category :id1 :value (- 0 msg)}))))
 
@@ -112,8 +120,9 @@
     (go-loop []
              (let [[id str-value] (<! in)
                    value (parse-number str-value)
+                   to-self? (send-to-self? str-value)
                    validated (validate-bet value (smaller-stack @data))]
-               (send-message out id validated)
+               (send-message out id validated to-self?)
                (update-stacks owner id validated))
              (recur))))
 
