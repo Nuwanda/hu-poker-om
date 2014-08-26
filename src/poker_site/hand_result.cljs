@@ -5,7 +5,7 @@
              [om-tools.core :refer-macros [defcomponent]]
              [poker-site.util :as util]
              [poker-site.facebook :as fb]
-             [cljs.core.async :refer [put! <! chan pub sub]]
+             [cljs.core.async :refer [put! <! chan pub sub alts!]]
              [cljs.reader :refer [read-string]]))
 
 
@@ -23,13 +23,18 @@
   (display-name [_]
                 "player-result")
   (will-mount [_]
-              (let [in-chan (chan)]
+              (let [in-chan (chan)
+                    clear-chan (chan)]
                 (if (= (:id data) 1)
                   (sub (om/get-state owner :in) :id1 in-chan)
                   (sub (om/get-state owner :in) :id2 in-chan))
-                (go-loop [msg (<! in-chan)]
-                         (om/set-state! owner :text (:value msg))
-                         (recur (<! in-chan)))))
+                (sub (om/get-state owner :in) :clear clear-chan)
+                (go-loop []
+                         (let [[msg c] (alts! [in-chan clear-chan])]
+                           (cond
+                            (= c in-chan) (om/set-state! owner :text (:value msg))
+                            (= c clear-chan) (om/set-state! owner :text "0")))
+                         (recur))))
   (render-state [_ {:keys [out text]}]
                 (dom/div {:style {:text-align "center"}}
                         (dom/label (:name data (str "Player " (:id data))))
