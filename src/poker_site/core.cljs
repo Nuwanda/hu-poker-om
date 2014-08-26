@@ -12,9 +12,9 @@
 
 (def app-state (atom {:logged false
                       :hu-state {
-                        :hand-count 35
-                        :player1 {:id 1 :stack 100 :bis 1 :name "Pedro Maia"}
-                        :player2 {:id 2 :stack 200 :bis 2 :name "Pedro Lopes"}}}))
+                        :hand-count 192
+                        :player1 {:id 1 :stack 228 :bis 3 :name "Pedro Maia"}
+                        :player2 {:id 2 :stack 372 :bis 3 :name "Pedro Lopes"}}}))
 
 (defcomponent teste [data owner]
   (display-name [_]
