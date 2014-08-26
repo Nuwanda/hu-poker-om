@@ -96,6 +96,15 @@
         (put! out {:category :id2 :value msg}))
       (put! out {:category :id1 :value (- 0 msg)}))))
 
+(defn- update-stacks [owner id validated]
+  (if (= id 1)
+    (do
+      (om/set-state! owner :p1bb validated)
+      (om/set-state! owner :p2bb (- 0 validated)))
+    (do
+      (om/set-state! owner :p2bb validated)
+      (om/set-state! owner :p1bb (- 0 validated)))))
+
 ;;Recebe e valida input, envia de volta
 (defn- handle-message [data owner]
   (let [in (om/get-state owner :in)
@@ -104,7 +113,8 @@
              (let [[id str-value] (<! in)
                    value (parse-number str-value)
                    validated (validate-bet value (smaller-stack @data))]
-               (send-message out id validated))
+               (send-message out id validated)
+               (update-stacks owner id validated))
              (recur))))
 
 ;;Component for hand result input
