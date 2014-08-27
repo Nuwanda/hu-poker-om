@@ -20,6 +20,6 @@ goog.addDependency("../poker_site/stats.js", ['poker_site.stats'], ['om_tools.do
 goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.timers'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'cljs.core.async.impl.timers']);
 goog.addDependency("../poker_site/facebook.js", ['poker_site.facebook'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'cljs.core.async', 'om.core']);
-goog.addDependency("../cljs/reader.js", ['cljs.reader'], ['goog.string', 'cljs.core']);
+goog.addDependency("../cljs/reader.js", ['cljs.reader'], ['goog.string', 'cljs.core', 'goog.string.StringBuffer']);
 goog.addDependency("../poker_site/hand_result.js", ['poker_site.hand_result'], ['poker_site.facebook', 'om_tools.dom', 'om_tools.core', 'cljs.core', 'cljs.core.async', 'poker_site.util', 'om.core', 'cljs.reader']);
 goog.addDependency("../poker_site/core.js", ['poker_site.core'], ['poker_site.hand_result', 'poker_site.facebook', 'om_tools.dom', 'om_tools.core', 'cljs.core', 'poker_site.hand_counter', 'om.core', 'poker_site.stats']);

@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2280
+// Compiled by ClojureScript 0.0-2322
 goog.provide('om_tools.dom');
 goog.require('cljs.core');
 goog.require('om.dom');
@@ -12,8 +12,8 @@ om_tools.dom.camel_case = (function camel_case(s){return clojure.string.replace.
 /**
 * Converts attributes that are kebab-case and should be camelCase
 */
-om_tools.dom.opt_key_case = (function opt_key_case(attr){if(cljs.core.truth_((function (){var or__3542__auto__ = (cljs.core.count.call(null,attr) < (5));if(or__3542__auto__)
-{return or__3542__auto__;
+om_tools.dom.opt_key_case = (function opt_key_case(attr){if(cljs.core.truth_((function (){var or__3558__auto__ = (cljs.core.count.call(null,attr) < (5));if(or__3558__auto__)
+{return or__3558__auto__;
 } else
 {return new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 2, ["aria-",null,"data-",null], null), null).call(null,cljs.core.subs.call(null,attr,(0),(5)));
 }
@@ -26,7 +26,7 @@ om_tools.dom.opt_key_case = (function opt_key_case(attr){if(cljs.core.truth_((fu
 /**
 * Converts aliased attributes
 */
-om_tools.dom.opt_key_alias = (function opt_key_alias(opt){var G__14505 = (((opt instanceof cljs.core.Keyword))?opt.fqn:null);switch (G__14505) {
+om_tools.dom.opt_key_alias = (function opt_key_alias(opt){var G__14532 = (((opt instanceof cljs.core.Keyword))?opt.fqn:null);switch (G__14532) {
 case "for":
 return new cljs.core.Keyword(null,"htmlFor","htmlFor",-1050291720);
 
@@ -51,7 +51,7 @@ om_tools.dom.format_opt_val = (function format_opt_val(opt_val){if(cljs.core.map
 /**
 * Returns JavaScript object for React DOM attributes from opts map
 */
-om_tools.dom.format_opts = (function format_opts(opts){return cljs.core.clj__GT_js.call(null,cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p__14509){var vec__14510 = p__14509;var k = cljs.core.nth.call(null,vec__14510,(0),null);var v = cljs.core.nth.call(null,vec__14510,(1),null);return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [om_tools.dom.format_opt_key.call(null,k),om_tools.dom.format_opt_val.call(null,v)], null);
+om_tools.dom.format_opts = (function format_opts(opts){return cljs.core.clj__GT_js.call(null,cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p__14536){var vec__14537 = p__14536;var k = cljs.core.nth.call(null,vec__14537,(0),null);var v = cljs.core.nth.call(null,vec__14537,(1),null);return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [om_tools.dom.format_opt_key.call(null,k),om_tools.dom.format_opt_val.call(null,v)], null);
 }),opts)));
 });
 om_tools.dom.literal_QMARK_ = (function literal_QMARK_(form){return !(((form instanceof cljs.core.Symbol)) || (cljs.core.list_QMARK_.call(null,form)));
@@ -74,16 +74,13 @@ om_tools.dom.element_args = (function element_args(opts,children){if((opts == nu
 {if(cljs.core.object_QMARK_.call(null,opts))
 {return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [opts,children], null);
 } else
-{if(new cljs.core.Keyword(null,"else","else",-1508377146))
 {return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [null,cljs.core.cons.call(null,opts,children)], null);
-} else
-{return null;
-}
+
 }
 }
 }
 });
-om_tools.dom.element = (function element(ctor,opts,children){var vec__14512 = om_tools.dom.element_args.call(null,opts,children);var opts__$1 = cljs.core.nth.call(null,vec__14512,(0),null);var children__$1 = cljs.core.nth.call(null,vec__14512,(1),null);return cljs.core.apply.call(null,ctor,cljs.core.flatten.call(null,cljs.core.cons.call(null,opts__$1,children__$1)));
+om_tools.dom.element = (function element(ctor,opts,children){var vec__14539 = om_tools.dom.element_args.call(null,opts,children);var opts__$1 = cljs.core.nth.call(null,vec__14539,(0),null);var children__$1 = cljs.core.nth.call(null,vec__14539,(1),null);return cljs.core.apply.call(null,ctor,cljs.core.flatten.call(null,cljs.core.cons.call(null,opts__$1,children__$1)));
 });
 om_tools.dom.class_set = (function class_set(m){var temp__4126__auto__ = cljs.core.seq.call(null,cljs.core.distinct.call(null,cljs.core.map.call(null,cljs.core.name,cljs.core.keys.call(null,cljs.core.filter.call(null,cljs.core.val,m)))));if(temp__4126__auto__)
 {var ks = temp__4126__auto__;return clojure.string.join.call(null," ",ks);
