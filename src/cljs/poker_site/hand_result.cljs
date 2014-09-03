@@ -20,32 +20,32 @@
 
 ;;Om component that handles each player's hand result
 (defcomponent player-result [data owner]
-  (display-name [_]
-                "player-result")
-  (will-mount [_]
-              (let [in-chan (chan)
-                    clear-chan (chan)]
-                (if (= (:id data) 1)
-                  (sub (om/get-state owner :in) :id1 in-chan)
-                  (sub (om/get-state owner :in) :id2 in-chan))
-                (sub (om/get-state owner :in) :clear clear-chan)
-                (go-loop []
-                         (let [[msg c] (alts! [in-chan clear-chan])]
-                           (cond
-                            (= c in-chan) (om/set-state! owner :text (:value msg))
-                            (= c clear-chan) (om/set-state! owner :text "0")))
-                         (recur))))
-  (render-state [_ {:keys [out text]}]
-                (dom/div {:style {:text-align "center"}}
-                        (dom/label (:name data (str "Player " (:id data))))
-                        (dom/div {:class "input-group"}
-                                 (dom/input {:class "form-control"
-                                             :type "text"
-                                             :style {:text-align "right"}
-                                             :value text
-                                             :on-change #(handle-input % out (:id @data) owner text)}
-                                            nil)
-                                 (dom/span {:class "input-group-addon"} "bb")))))
+              (display-name [_]
+                            "player-result")
+              (will-mount [_]
+                          (let [in-chan (chan)
+                                clear-chan (chan)]
+                            (if (= (:id data) 1)
+                              (sub (om/get-state owner :in) :id1 in-chan)
+                              (sub (om/get-state owner :in) :id2 in-chan))
+                            (sub (om/get-state owner :in) :clear clear-chan)
+                            (go-loop []
+                                     (let [[msg c] (alts! [in-chan clear-chan])]
+                                       (cond
+                                         (= c in-chan) (om/set-state! owner :text (:value msg))
+                                         (= c clear-chan) (om/set-state! owner :text "0")))
+                                     (recur))))
+              (render-state [_ {:keys [out text]}]
+                            (dom/div {:style {:text-align "center"}}
+                                     (dom/label (:name data (str "Player " (:id data))))
+                                     (dom/div {:class "input-group"}
+                                              (dom/input {:class "form-control"
+                                                          :type "text"
+                                                          :style {:text-align "right"}
+                                                          :value text
+                                                          :on-change #(handle-input % out (:id @data) owner text)}
+                                                         nil)
+                                              (dom/span {:class "input-group-addon"} "bb")))))
 
 
 ;;Function that handles hand import ("add hand" button)

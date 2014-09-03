@@ -17,12 +17,12 @@
                         :player2 {:id 2 :stack 372 :bis 3 :name "Pedro Lopes"}}}))
 
 (defcomponent teste [data owner]
-  (display-name [_]
-                "root")
-  (render [_]
-          (dom/div
-           (om/build stats data)
-           (om/build hand-result data))))
+              (display-name [_]
+                            "root")
+              (render [_]
+                      (dom/div
+                        (om/build stats data)
+                        (om/build hand-result data))))
 
 (om/root teste app-state {:target (. js/document (getElementById "app"))})
 

@@ -10,11 +10,10 @@
                  [compojure "1.1.5"]
                  [ring/ring-devel "1.1.8"]
                  [ring/ring-core "1.1.8"]
-                 [http-kit "2.1.16"]]
+                 [http-kit "2.1.16"]
+                 [clj-json "0.5.3"]]
 
   :plugins [[lein-cljsbuild "1.0.4-SNAPSHOT"]]
-
-  :hooks [leiningen.cljsbuild]
 
   :source-paths ["src/clj"]
 
